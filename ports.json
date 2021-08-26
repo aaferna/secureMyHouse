@@ -1,0 +1,98 @@
+{
+	"gpoi":{
+
+		"p5" : {
+			"name":"AREA O DISPOSITIVO",	
+    		"active":true
+		},
+		"p6" : {
+			"name":"AREA O DISPOSITIVO",	
+    		"active":false
+		},
+		"p7" : {
+			"name":"AREA O DISPOSITIVO",	
+    		"active":false
+		},
+		"p8" : {
+			"name":"AREA O DISPOSITIVO",	
+    		"active":false
+		},
+		"p9" : {
+			"name":"AREA O DISPOSITIVO",	
+    		"active":false
+		},
+		"p10" : {
+			"name":"AREA O DISPOSITIVO",	
+    		"active":false
+		},
+		"p11" : {
+			"name":"AREA O DISPOSITIVO",	
+    		"active":false
+		},
+		"p12" : {
+			"name":"AREA O DISPOSITIVO",	
+    		"active":false
+		},
+		"p13" : {
+			"name":"AREA O DISPOSITIVO",	
+    		"active":false
+		},
+		"p14" : {
+			"name":"AREA O DISPOSITIVO",	
+    		"active":false
+		},
+		"p15" : {
+			"name":"AREA O DISPOSITIVO",	
+    		"active":false
+		},
+		"p16" : {
+			"name":"AREA O DISPOSITIVO",	
+    		"active":false
+		},
+		"p17" : {
+			"name":"AREA O DISPOSITIVO",	
+    		"active":false
+		},
+		"p18" : {
+			"name":"AREA O DISPOSITIVO",	
+    		"active":false
+		},
+		"p19" : {
+			"name":"AREA O DISPOSITIVO",	
+    		"active":false
+		},
+		"p20" : {
+			"name":"AREA O DISPOSITIVO",	
+    		"active":false
+		},
+		"p21" : {
+			"name":"Sensor de Ventana",	
+    		"active": false
+		},
+		"p22" : {
+			"name":"AREA O DISPOSITIVO",	
+    		"active":false
+		},
+		"p23" : {
+			"name":"AREA O DISPOSITIVO",	
+    		"active":false
+		},
+		"p24" : {
+			"name":"AREA O DISPOSITIVO",	
+    		"active":false
+		},
+		"p25" : {
+			"name":"AREA O DISPOSITIVO",	
+    		"active":false
+		},
+		"p26" : {
+			"name":"AREA O DISPOSITIVO",	
+    		"active":false
+		},
+		"p27" : {
+			"name":"AREA O DISPOSITIVO",	
+    		"active":false
+		}
+		
+	}
+}
