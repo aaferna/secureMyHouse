@@ -1,18 +1,7 @@
 {
 	"gpoi":{
 
-		"p5" : {
-			"name":"AREA O DISPOSITIVO",	
-    		"active":true
-		},
-		"p6" : {
-			"name":"AREA O DISPOSITIVO",	
-    		"active":false
-		},
-		"p7" : {
-			"name":"AREA O DISPOSITIVO",	
-    		"active":false
-		},
+		
 		"p8" : {
 			"name":"AREA O DISPOSITIVO",	
     		"active":false
@@ -37,14 +26,7 @@
 			"name":"AREA O DISPOSITIVO",	
     		"active":false
 		},
-		"p14" : {
-			"name":"AREA O DISPOSITIVO",	
-    		"active":false
-		},
-		"p15" : {
-			"name":"AREA O DISPOSITIVO",	
-    		"active":false
-		},
+		
 		"p16" : {
 			"name":"AREA O DISPOSITIVO",	
     		"active":false
@@ -55,7 +37,7 @@
 		},
 		"p18" : {
 			"name":"AREA O DISPOSITIVO",	
-    		"active":false
+    		"active":true
 		},
 		"p19" : {
 			"name":"AREA O DISPOSITIVO",	
@@ -67,7 +49,7 @@
 		},
 		"p21" : {
 			"name":"Sensor de Ventana",	
-    		"active": false
+    		"active":false
 		},
 		"p22" : {
 			"name":"AREA O DISPOSITIVO",	
