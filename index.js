@@ -20,10 +20,10 @@ let run = false
 /*  Telegram Bot */
 
   let tetok = process.env.TELEGTOK
-
+  let bot
   if(tetok){
 
-    const bot = new Telegraf(process.env.TELEGTOK)
+    bot = new Telegraf(process.env.TELEGTOK)
 
     bot.catch((err, ctx) => {
       console.log(`Ooops, encountered an error for ${ctx.updateType}`, err)
@@ -304,12 +304,14 @@ const ApagarAl = () => {
     } else {
       run = true
       IniciarAl()
+      sendMSG("Iniciando alarma por API")
       res.send({ status: 201, msg: "Iniciando Alarma"})
     }
   });
 
   exp.get('/stop', function(req, res) {
     if (run = true) {
+      sendMSG("Apagando alarma por API")
       ApagarAl()
       run = false
       res.send({ status: 201, msg: "Alarma Apagada"})
