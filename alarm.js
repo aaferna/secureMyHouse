@@ -1,5 +1,8 @@
+require('dotenv').config();
+
 const { DateTime } = require("luxon");
 const solar = require("solardb-core")
+const { Telegraf } = require('telegraf')
 
 const Gpio = require('onoff').Gpio;
 const speeker = new Gpio(0, 'out');    // Pin de Speeker
@@ -15,6 +18,8 @@ ledRojo.writeSync(0);
   let idLog = ""
 
   const registreActivityAlarm = (gpio = null, msg = null, device = null, state = null) =>{
+
+    sendMsg(msg +" en "+ device)
 
       let r = solar.dbGetLatestFile("_ActivityAlarm_")
       let now = DateTime.local().setZone("America/Argentina/Buenos_Aires").c
@@ -213,8 +218,8 @@ const ApagarAl = () => {
 
 // Exporto Modulos \\
  
-exports.sonarAlarmaAct = sonarAlarmaAct;
-exports.sonarAlarmaDes = sonarAlarmaDes;
-exports.Aviso = Aviso;
-exports.IniciarAl = IniciarAl;
-exports.ApagarAl = ApagarAl;
+// exports.sonarAlarmaAct = sonarAlarmaAct;
+// exports.sonarAlarmaDes = sonarAlarmaDes;
+// exports.Aviso = Aviso;
+// exports.IniciarAl = IniciarAl;
+// exports.ApagarAl = ApagarAl;

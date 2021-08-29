@@ -9,10 +9,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "luxon": "^2.0.2",
     "onoff": "^6.0.3",
     "solardb-core": "^2.4.0",
+    "telegraf": "^3.39.0",
     "underscore": "^1.13.1"
   }
 }
