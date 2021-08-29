@@ -1,13 +1,8 @@
 {
 	"gpoi":{
 
-		
-		"p8" : {
-			"name":"AREA O DISPOSITIVO",	
-    		"active":false
-		},
 		"p9" : {
-			"name":"AREA O DISPOSITIVO",	
+			"name":"sensor 1",	
     		"active":false
 		},
 		"p10" : {
@@ -24,7 +19,7 @@
 		},
 		"p13" : {
 			"name":"AREA O DISPOSITIVO",	
-    		"active":false
+    		"active":true
 		},
 		
 		"p16" : {
@@ -37,7 +32,7 @@
 		},
 		"p18" : {
 			"name":"AREA O DISPOSITIVO",	
-    		"active":true
+    		"active":false
 		},
 		"p19" : {
 			"name":"AREA O DISPOSITIVO",	
@@ -72,7 +67,7 @@
     		"active":false
 		},
 		"p27" : {
-			"name":"AREA O DISPOSITIVO",	
+			"name":"sensor 2",	
     		"active":false
 		}
 		

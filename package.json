@@ -9,8 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "loggering": "^1.2.2",
+    "express": "^4.17.1",
     "luxon": "^2.0.2",
-    "onoff": "^6.0.3"
+    "onoff": "^6.0.3",
+    "solardb-core": "^2.4.0",
+    "underscore": "^1.13.1"
   }
 }
