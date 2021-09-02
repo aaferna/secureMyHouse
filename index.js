@@ -71,9 +71,10 @@ let run = false
       bot.telegram.sendMessage(process.env.IDCHAT, msg)
     }
   }
-    // bot.on('text', (ctx) => {
-    //   return ctx.reply(`Message counter:${ctx.chat.id}`)
-    // })
+  bot.on('chatIDclog', (ctx) => {
+    console.log(`Message counter:${ctx.chat.id}`)
+    return ctx.reply(`Listo`)
+  })
 
 
 /*  Telegram Bot */
