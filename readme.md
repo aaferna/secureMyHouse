@@ -12,6 +12,15 @@
   <br><br>
 </p>
 
+#.env Configuracion
+
+
+```
+  TELEGTOK="193245345400:AAGTI6dO1isdfgs543tydfISwwsi-Y"
+  IDCHAT="-5223423496"
+```
+
+
 <p align="center">
   <br>
   <bR>
