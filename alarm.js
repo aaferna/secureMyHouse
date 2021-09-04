@@ -1,13 +1,15 @@
-require('dotenv').config();
 const { DateTime } = require("luxon");
-const { Telegraf } = require('telegraf')
-
+const helmet = require("helmet");
 const Gpio = require('onoff').Gpio;
 const solar = require("solardb-core")
 const path = require('path');
 const express = require('express');
+const axios = require('axios');
+require('dotenv').config();
+
 const exp = express();
 exp.use(express.json())
+exp.use(helmet())
 
 const speeker = new Gpio(0, 'out');    // Pin de Speeker
 const ledRojo = new Gpio(2, 'out');   // Led Rojo
@@ -16,96 +18,46 @@ speeker.writeSync(0);
 ledRojo.writeSync(0);
 
 let run = false
-
-/*  Telegram Bot */
-
-  let tetok = process.env.TELEGTOK
-  let bot
-  if(tetok){
-
-    bot = new Telegraf(process.env.TELEGTOK)
-
-    bot.catch((err, ctx) => {
-      console.log(`Ooops, encountered an error for ${ctx.updateType}`, err)
-    })
-    bot.command('start', ({ reply }) => { 
-          reply("Elija de la lista que comando iniciar")
-    })
-    bot.command('run', ({ reply }) => { 
-        if(run === true){
-            reply("Alarma ya iniciada")
-        } else {
-            run = true
-            IniciarAl()
-            reply("Iniciando Alarma")
-        }
-    })
-    bot.command('status', ({ reply }) => { 
-      if(run === true){
-          reply("Alarma Activa")
-      } else {
-          reply("Alarma Apagada")
-      }
-    })
-    bot.command('stop', ({ reply }) => { 
-        if (run = true) {
-          let sts = ApagarAl()
-          if(sts === 1){
-            reply("Alarma Apagada")
-            run = false
-          } else {
-            reply("La alarma aun se esta Iniciando")
-          }
-        } else {
-          reply("Alarma sin sonar")
-        }
-    })
-    bot.command('getid', (ctx) => {
-      console.log(ctx.message.chat.id)
-    })
-
-  } 
-
-  const sendMSG = (msg) =>{
-    if(tetok){
-      bot.telegram.sendMessage(process.env.IDCHAT, msg)
-    }
-  }
-  bot.on('chatIDclog', (ctx) => {
-    console.log(`Message counter:${ctx.chat.id}`)
-    return ctx.reply(`Listo`)
-  })
-
-
-/*  Telegram Bot */
-
+let startup = false
 
 /* Registro de Actividad */
 
-  let dayActive = ""
-  let idLog = ""
-
   const registreActivityAlarm = (gpio = null, msg = null, device = null, state = null) =>{
 
-    sendMSG(device+": "+msg)
+    let idLog = 0
+    let now = DateTime.local().setZone("America/Argentina/Buenos_Aires").c
+    let id = parseInt(solar.dbGetLatestFile("_ActivityAlarm_"))
 
-      let r = solar.dbGetLatestFile("_ActivityAlarm_")
-      let now = DateTime.local().setZone("America/Argentina/Buenos_Aires").c
-      if(r.date != undefined && dayActive === "" && idLog === ""){
-        if(parseInt(r.date[1]) === now.day){
-          dayActive = now.day
-          idLog = r.index
-        } else {
-          dayActive = now.day
-        }
+      if(process.env.TELEGTOK){
+        let data = JSON.stringify({
+          "msg": device+" "+msg
+        });
+        let config = {
+          method: 'post',
+          url: 'http://raspberrypi:5247/sendmsg',
+          headers: { 
+            'Content-Type': 'application/json'
+          },
+          data : data
+        };
+        axios(config).then((response) => {
+          // console.log(JSON.stringify(response.data));
+        }).catch((error) => {
+          console.log(error);
+        });
       }
-      if(now.day === dayActive){ 
+
+      if(id != 0){
+        let r = solar.dbGetData(id, "_ActivityAlarm_").pop()
+        if(now.day == r.date.day){ idLog = id }
+      }
+        
+      if(idLog != 0){ 
         solar.dbUpdate({state:state, "gpio": gpio, "msg": msg, device: device, "date": now }, idLog, "_ActivityAlarm_") 
       } else {
-        dayActive = now.day
         idLog = solar.dbInsert({state:state, "gpio": gpio, "msg": msg, device: device, "date": now }, "_ActivityAlarm_").id
       }
-      
+ 
   }
 
 /* Registro de Actividad */
@@ -133,19 +85,17 @@ let run = false
             ledRojo.writeSync(0);
             estadoDeBit = 0
             }
-        }, 250);
+        }, 200);
         stoperAlarma = setTimeout(() => {
             speeker.writeSync(0);
             ledRojo.writeSync(0);
             clearTimeout(actividadAlarma)
             actAlarmstt = false
             alarmaSonando = false
-        }, 3000); // Apago la alarma luego de 2 Min
+        }, 120000); // Apago la alarma luego de 2 Min
 
-    } else {
-      console.log('ya esta sonando')
-    }
-
+    } 
+    
   }
 
   const sonarAlarmaDes = () => {
@@ -184,9 +134,9 @@ let run = false
 
 /* Aviso Sonoro de Error */
 
-
   function initAlarm() {
       return new Promise(function(resolve, reject) {
+
           let count = 0
           let act2 = 0
           let act = setInterval(() => {
@@ -222,13 +172,16 @@ let run = false
                 speeker.writeSync(0);
                 clearTimeout(act);
                 resolve(true)
+                startup = false
               }
               count2 ++
             }, 100);
           }
+
       })
   };
 
+/* Aviso Sonoro de Error */
 
 /* Lister GPIO */
 
@@ -248,86 +201,98 @@ let run = false
 
 /* Logica */
 
-let pin = []
-const IniciarAl = () => {
+  let pin = []
+  const IniciarAl = () => {
 
-    gpioListing()
+      gpioListing()
 
-    if(pinArr.length != 0){ 
-      initAlarm().then( e => {
-        for (let index = 0; index < pinArr.length; index++) {
-          pin[pinArr[index].pin] = new Gpio(pinArr[index].pin, 'in', 'both'); 
-          pin[pinArr[index].pin].watch((err, value) => {
-              if (err) {  registreActivityAlarm(pinArr[index].pin, err, pinArr[index].name)} 
-              else {
-                if(value === 0){ 
-                  registreActivityAlarm(pinArr[index].pin, "Sensor Abierto", pinArr[index].name, value)
-                  sonarAlarmaAct()
+      if(pinArr.length != 0){ 
+        initAlarm().then( e => {
+          for (let index = 0; index < pinArr.length; index++) {
+            pin[pinArr[index].pin] = new Gpio(pinArr[index].pin, 'in', 'both'); 
+            pin[pinArr[index].pin].watch((err, value) => {
+                if (err) {  registreActivityAlarm(pinArr[index].pin, err, pinArr[index].name)} 
+                else {
+                  if(value === 0){ 
+                    registreActivityAlarm(pinArr[index].pin, "Sensor Abierto", pinArr[index].name, value)
+                    sonarAlarmaAct()
+                  }
+                  if(value === 1){ 
+                    registreActivityAlarm(pinArr[index].pin, "Sensor Cerrado", pinArr[index].name, value)
+                    // sonarAlarmaDes() 
+                  }
                 }
-                if(value === 1){ 
-                  registreActivityAlarm(pinArr[index].pin, "Sensor Cerrado", pinArr[index].name, value)
-                  sonarAlarmaDes() 
-                }
-              }
-          });
-        }
-      })
-    }
+            });
+          }
+        })
+      }
 
-}
-
-const ApagarAl = () => {
-
-  if(pin.length != 0){
-    sonarAlarmaDes()
-    for (let index = 0; index < pinArr.length; index++) {
-      pin[pinArr[index].pin].unwatch()
-    }
-    pinArr = []
-    return 1
-  } else {
-    return 0
   }
-}
+
+  const ApagarAl = () => {
+
+    if(pin.length != 0){
+      sonarAlarmaDes()
+      for (let index = 0; index < pinArr.length; index++) {
+        pin[pinArr[index].pin].unwatch()
+      }
+      pinArr = []
+      return 1
+    } else {
+      return 0
+    }
+  }
 
 /* Logica */
 
 
 /*  Express API */
 
-  exp.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, '/public/index.html'));
-  });
-
   exp.get('/start', function(req, res) {
+
     if(run === true){
       res.send({ status: 201, msg: "Alarma ya iniciada"})
     } else {
       run = true
+      startup = true
       IniciarAl()
-      sendMSG("Iniciando alarma por API")
       res.send({ status: 201, msg: "Iniciando Alarma"})
     }
   });
 
   exp.get('/stop', function(req, res) {
-    if (run = true) {
-      sendMSG("Apagando alarma por API")
-      ApagarAl()
-      run = false
-      res.send({ status: 201, msg: "Alarma Apagada"})
+
+    if (run == true) {
+
+      if(startup == true){
+        res.send({ status: 201, msg: "Alarma aun Iniciando"})
+      } else {
+        ApagarAl()
+        run = false
+        res.send({ status: 201, msg: "Alarma Apagada"})
+      }
+     
     } else {
-      res.send({ status: 201, msg: "Alarma sin sonar"})
+      res.send({ status: 201, msg: "Alarma sin iniciar"})
+    }
+
+  });
+  
+  exp.get('/status', function(req, res) {
+    if (run === true) {
+      if(sonarAlarma === true){
+        res.send({ status: 201, msg: "Alarma Activa y Sonando"})
+      } else {
+        res.send({ status: 201, msg: "Alarma Activa"})
+      }
+
+    } else {
+      res.send({ status: 201, msg: "Alarma Apagada"})
     }
   });
 
-  exp.listen("3000", () => {
-    console.log(`Sirviendo http://localhost:3000`)
+  exp.listen("4247", () => {
+    console.log(`Servicio iniciado`)
   })
 
 /*  Express API */
-
-
-if(tetok){
-  bot.launch()
-}

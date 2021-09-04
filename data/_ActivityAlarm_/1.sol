@@ -1,0 +1,11 @@
+{"state":0,"gpio":"21","msg":"Sensor Abierto","device":"Ventana","date":{"year":2021,"month":9,"day":4,"hour":12,"minute":22,"second":48,"millisecond":670}}
+{"state":1,"gpio":"21","msg":"Sensor Cerrado","device":"Ventana","date":{"year":2021,"month":9,"day":4,"hour":12,"minute":22,"second":50,"millisecond":54}}
+{"state":0,"gpio":"21","msg":"Sensor Abierto","device":"Ventana","date":{"year":2021,"month":9,"day":4,"hour":12,"minute":25,"second":9,"millisecond":541}}
+{"state":1,"gpio":"21","msg":"Sensor Cerrado","device":"Ventana","date":{"year":2021,"month":9,"day":4,"hour":12,"minute":25,"second":11,"millisecond":281}}
+{"state":0,"gpio":"21","msg":"Sensor Abierto","device":"Ventana","date":{"year":2021,"month":9,"day":4,"hour":12,"minute":47,"second":35,"millisecond":109}}
+{"state":1,"gpio":"21","msg":"Sensor Cerrado","device":"Ventana","date":{"year":2021,"month":9,"day":4,"hour":12,"minute":47,"second":39,"millisecond":915}}
+{"state":0,"gpio":"21","msg":"Sensor Abierto","device":"Ventana","date":{"year":2021,"month":9,"day":4,"hour":12,"minute":50,"second":53,"millisecond":553}}
+{"state":1,"gpio":"21","msg":"Sensor Cerrado","device":"Ventana","date":{"year":2021,"month":9,"day":4,"hour":12,"minute":50,"second":56,"millisecond":683}}
+{"state":0,"gpio":"21","msg":"Sensor Abierto","device":"Ventana","date":{"year":2021,"month":9,"day":4,"hour":12,"minute":58,"second":47,"millisecond":921}}
+{"state":0,"gpio":"21","msg":"Sensor Abierto","device":"Ventana","date":{"year":2021,"month":9,"day":4,"hour":12,"minute":59,"second":33,"millisecond":321}}
+{"state":0,"gpio":"21","msg":"Sensor Abierto","device":"Ventana","date":{"year":2021,"month":9,"day":4,"hour":12,"minute":59,"second":33,"millisecond":378}}

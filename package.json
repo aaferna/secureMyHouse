@@ -9,11 +9,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.21.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "helmet": "^4.6.0",
     "luxon": "^2.0.2",
     "onoff": "^6.0.3",
-    "solardb-core": "^2.4.0",
+    "solardb-core": "^3.1.1",
     "telegraf": "^3.39.0",
     "underscore": "^1.13.1"
   }
