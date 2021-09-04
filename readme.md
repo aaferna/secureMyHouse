@@ -12,7 +12,7 @@
   <br><br>
 </p>
 
-#.env Configuracion
+# .env Configuracion
 
 
 ```
