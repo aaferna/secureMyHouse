@@ -1,0 +1,1 @@
+{"pin":"20","name":"Ventana de Cocina", "active": true}

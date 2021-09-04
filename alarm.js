@@ -136,47 +136,48 @@ let startup = false
 
   function initAlarm() {
       return new Promise(function(resolve, reject) {
-
-          let count = 0
-          let act2 = 0
-          let act = setInterval(() => {
-            if(act2 === 0){
-              speeker.writeSync(1)
-              ledRojo.writeSync(1);
-              act2 = 1
-            } else {
-              speeker.writeSync(0)
-              ledRojo.writeSync(0);
-              act2 = 0
-            }
-            if(count === 60){
-              speeker.writeSync(0);
-              clearTimeout(act);
-              timmerExpress();
-            }
-            count ++
-          }, 300);
-          const timmerExpress = () => {
-            let count2= 0
-            let act = setInterval(() => {
-              if(act2 === 0){
-                speeker.writeSync(1)
-                ledRojo.writeSync(1);
-                act2 = 1
-              } else {
-                speeker.writeSync(0)
-                ledRojo.writeSync(0);
-                act2 = 0
-              }
-              if(count2 === 120){
-                speeker.writeSync(0);
-                clearTimeout(act);
-                resolve(true)
-                startup = false
-              }
-              count2 ++
-            }, 100);
-          }
+        resolve(true)
+        startup = false
+          // let count = 0
+          // let act2 = 0
+          // let act = setInterval(() => {
+          //   if(act2 === 0){
+          //     speeker.writeSync(1)
+          //     ledRojo.writeSync(1);
+          //     act2 = 1
+          //   } else {
+          //     speeker.writeSync(0)
+          //     ledRojo.writeSync(0);
+          //     act2 = 0
+          //   }
+          //   if(count === 60){
+          //     speeker.writeSync(0);
+          //     clearTimeout(act);
+          //     timmerExpress();
+          //   }
+          //   count ++
+          // }, 300);
+          // const timmerExpress = () => {
+          //   let count2= 0
+          //   let act = setInterval(() => {
+          //     if(act2 === 0){
+          //       speeker.writeSync(1)
+          //       ledRojo.writeSync(1);
+          //       act2 = 1
+          //     } else {
+          //       speeker.writeSync(0)
+          //       ledRojo.writeSync(0);
+          //       act2 = 0
+          //     }
+          //     if(count2 === 120){
+          //       speeker.writeSync(0);
+          //       clearTimeout(act);
+          //       resolve(true)
+          //       startup = false
+          //     }
+          //     count2 ++
+          //   }, 100);
+          // }
 
       })
   };

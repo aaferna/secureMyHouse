@@ -1,1 +1,1 @@
-{"pin":"21","name":"Ventana", "active": true}
+{"pin":"21","name":"Puerta de Entrada", "active": true}

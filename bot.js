@@ -21,13 +21,26 @@ if(tetok){
   //       reply("Elija de la lista que comando iniciar")
   // })
 
-  bot.command('run', ctrx => { 
+  bot.command('start', ctrx => { 
 
     ctrx.reply('Un momento');  
 
     axios({
       method: 'get',
       url: 'http://raspberrypi:4247/start'
+    })
+    .then((response) => { ctrx.reply(response.data.msg); })
+    .catch((error) => { ctrx.reply(error.code); });
+
+  })
+
+  bot.command('silent', ctrx => { 
+
+    ctrx.reply('Un momento');  
+
+    axios({
+      method: 'get',
+      url: 'http://raspberrypi:4247/startsilent'
     })
     .then((response) => { ctrx.reply(response.data.msg); })
     .catch((error) => { ctrx.reply(error.code); });
