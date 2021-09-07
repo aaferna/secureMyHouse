@@ -1,7 +1,7 @@
 {
   "name": "securemyhouse",
   "version": "1.0.0",
-  "description": "",
+  "description": "Sistema de Alarma OpenSource",
   "main": "index.js",
   "scripts": {
     "test": "node index.js"

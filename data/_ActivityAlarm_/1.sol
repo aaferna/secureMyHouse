@@ -20,3 +20,9 @@
 {"state":1,"gpio":"21","msg":"Sensor Cerrado","device":"Ventana","date":{"year":2021,"month":9,"day":4,"hour":2,"minute":6,"second":47,"millisecond":486}}
 {"state":0,"gpio":"20","msg":"Sensor Abierto","device":"Ventana de Cocina","date":{"year":2021,"month":9,"day":4,"hour":2,"minute":28,"second":23,"millisecond":610}}
 {"state":1,"gpio":"20","msg":"Sensor Cerrado","device":"Ventana de Cocina","date":{"year":2021,"month":9,"day":4,"hour":2,"minute":28,"second":26,"millisecond":404}}
+{"state":1,"gpio":"21","msg":"Sensor Cerrado","device":"Puerta de Entrada","date":{"year":2021,"month":9,"day":4,"hour":3,"minute":8,"second":25,"millisecond":749}}
+{"state":1,"gpio":"20","msg":"Sensor Cerrado","device":"Ventana de Cocina","date":{"year":2021,"month":9,"day":4,"hour":3,"minute":8,"second":25,"millisecond":782}}
+{"state":1,"gpio":"21","msg":"Sensor Cerrado","device":"Puerta de Entrada","date":{"year":2021,"month":9,"day":4,"hour":3,"minute":8,"second":25,"millisecond":829}}
+{"state":1,"gpio":"20","msg":"Sensor Cerrado","device":"Ventana de Cocina","date":{"year":2021,"month":9,"day":4,"hour":3,"minute":13,"second":25,"millisecond":103}}
+{"state":1,"gpio":"20","msg":"Sensor Cerrado","device":"Ventana de Cocina","date":{"year":2021,"month":9,"day":4,"hour":3,"minute":14,"second":42,"millisecond":307}}
+{"state":1,"gpio":"21","msg":"Sensor Cerrado","device":"Puerta de Entrada","date":{"year":2021,"month":9,"day":4,"hour":3,"minute":14,"second":42,"millisecond":335}}
