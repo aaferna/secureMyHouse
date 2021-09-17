@@ -202,6 +202,7 @@ let startup = false
 /* Logica */
 
   let pin = []
+  let pinsts = []
   const IniciarAl = () => {
 
       gpioListing()
@@ -209,17 +210,19 @@ let startup = false
       if(pinArr.length != 0){ 
         initAlarm().then( e => {
           for (let index = 0; index < pinArr.length; index++) {
+            pinsts[pinArr[index].pin] = false
             pin[pinArr[index].pin] = new Gpio(pinArr[index].pin, 'in', 'both'); 
             pin[pinArr[index].pin].watch((err, value) => {
                 if (err) {  registreActivityAlarm(pinArr[index].pin, err, pinArr[index].name)} 
                 else {
-                  if(value === 0){ 
+                  if(value === 0 && pinsts[pinArr[index].pin] === false){ 
                     registreActivityAlarm(pinArr[index].pin, "Sensor Abierto", pinArr[index].name, value)
                     sonarAlarmaAct()
+                    pinsts[pinArr[index].pin] = true
                   }
-                  if(value === 1){ 
+                  if(value === 1 && pinsts[pinArr[index].pin] === true){ 
+                    pinsts[pinArr[index].pin] = false
                     registreActivityAlarm(pinArr[index].pin, "Sensor Cerrado", pinArr[index].name, value)
-                    // sonarAlarmaDes() 
                   }
                 }
             });
@@ -237,6 +240,7 @@ let startup = false
         pin[pinArr[index].pin].unwatch()
       }
       pinArr = []
+      pinsts = []
       return 1
     } else {
       return 0
